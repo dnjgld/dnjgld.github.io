@@ -1,1 +1,69 @@
-﻿
+﻿<!-- ✂️ 待办事项模块插入位置 -->
+<hr>
+<h2>待办事项</h2>
+<div id="todo-container" class="tool">
+    <input type="text" id="todo-input" placeholder="输入待办事项...">
+    <button onclick="addTodo()">添加</button>
+    <ul id="todo-list"></ul>
+</div>
+
+<style>
+  #todo-container {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 500px;
+  }
+  #todo-input {
+    padding: 5px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  #todo-list {
+    list-style: none;
+    padding: 0;
+  }
+  #todo-list li {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+  #todo-list li.completed {
+    text-decoration: line-through;
+    color: gray;
+  }
+  #todo-list li span {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function addTodo() {
+    const input = document.getElementById('todo-input');
+    const text = input.value.trim();
+    if (!text) return;
+    const li = document.createElement('li');
+    li.textContent = text;
+    li.onclick = () => li.classList.toggle('completed');
+
+    const del = document.createElement('span');
+    del.textContent = '✖';
+    del.onclick = (e) => {
+      e.stopPropagation();
+      li.remove();
+    };
+    li.appendChild(del);
+
+    document.getElementById('todo-list').appendChild(li);
+    input.value = '';
+  }
+</script>
+
+<!-- ✂️ 作者信息更新为 Jinglong -->
+<div class="card-info-avatar is-center">
+    <img class="avatar-img" src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="avatar">
+    <div class="author-info__name">Jinglong</div>
+    <div class="author-info__description">95后青年，后端开发者，略懂前端，<s>学生，实习</s>，缺乏社会的毒打</div>
+</div>
