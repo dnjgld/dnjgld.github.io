@@ -59,10 +59,49 @@
     del.onclick = (e) => {
       e.stopPropagation();
       li.remove();
+      saveTodos(); // 保存更新后的待办事项
     };
     li.appendChild(del);
 
     document.getElementById('todo-list').appendChild(li);
     input.value = '';
+    saveTodos(); // 保存待办事项
   }
+
+  function saveTodos() {
+    const todos = [];
+    document.querySelectorAll('#todo-list li').forEach((li) => {
+      todos.push({
+        text: li.firstChild.textContent,
+        completed: li.classList.contains('completed'),
+      });
+    });
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  function loadTodos() {
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const todoList = document.getElementById('todo-list');
+    todoList.innerHTML = ''; // 清空列表
+    todos.forEach((todo) => {
+      const li = document.createElement('li');
+      li.textContent = todo.text;
+      if (todo.completed) li.classList.add('completed');
+      li.onclick = () => li.classList.toggle('completed');
+
+      const del = document.createElement('span');
+      del.textContent = '✖';
+      del.onclick = (e) => {
+        e.stopPropagation();
+        li.remove();
+        saveTodos(); // 保存更新后的待办事项
+      };
+      li.appendChild(del);
+
+      todoList.appendChild(li);
+    });
+  }
+
+  // 在页面加载时自动加载待办事项
+  window.onload = loadTodos;
 </script>
