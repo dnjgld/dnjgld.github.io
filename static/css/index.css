@@ -54,4 +54,30 @@
     color: red;
     cursor: pointer;
   }
-  
+  #schedule-table {
+    margin: 30px auto;
+    text-align: center;
+    max-width: 1500px;
+  }
+
+  #schedule-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    table-layout: fixed; /* 强制每列宽度相等 */
+  }
+
+  #schedule-table th, #schedule-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center; /* 水平居中 */
+    vertical-align: middle; /* 垂直居中 */
+  }
+
+  #schedule-table th {
+    background-color: #f2f2f2;
+  }
+
+  #schedule-table td:hover {
+    background-color: #eaf6ff;
+  }

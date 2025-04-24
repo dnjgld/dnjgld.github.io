@@ -24,6 +24,73 @@
   <ul id="todo-list"></ul>
 </div>
 
+<!-- ✂️ 日程表模块 -->
+<hr>
+<h2>本周日程表</h2>
+<div id="schedule-table">
+  <table>
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>周一</th>
+        <th>周二</th>
+        <th>周三</th>
+        <th>周四</th>
+        <th>周五</th>
+        <th>周六</th>
+        <th>周日</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>9:00 - 10:00</td>
+        <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>10:00 - 11:00</td>
+        <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>11:00 - 12:00</td>
+        <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>12:00 - 13:00</td>
+        <td>2541W_LEC(12:45~14:05)</td><td>X</td><td>2541W_LEC(12:45~14:05)</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>13:00 - 14:00</td>
+        <td>2541W_LEC(12:45~14:05)</td><td>X</td><td>2541W_LEC(12:45~14:05)</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>14:00 - 15:00</td>
+        <td>2541W_LEC(12:45~14:05)</td><td>X</td><td>2541W_LEC(12:45~14:05)</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>15:00 - 16:00</td>
+        <td>X</td><td>X</td><td>2541W_LAB(14:15~15:35)</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>16:00 - 17:00</td>
+        <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>17:00 - 18:00</td>
+        <td>X</td><td>Office Hours</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>18:00 - 19:00</td>
+        <td>X</td><td>Office Hours</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>
+      </tr>
+      <tr>
+        <td>19:00 - 00:00</td>
+        <td colspan="7">自由时间</td>
+      </tr>
+      <!-- 可继续添加行 -->
+    </tbody>
+  </table>
+</div>
+
 <script>
   let isLoggedIn = false;
 
@@ -102,6 +169,35 @@
     });
   }
 
-  // 在页面加载时自动加载待办事项
-  window.onload = loadTodos;
+  function colorizeTable() {
+    const table = document.querySelector('#schedule-table table');
+    const cells = table.querySelectorAll('td');
+    const colorMap = {}; // 用于存储内容和对应颜色的映射
+    const colors = ['#FFCCCC', '#CCFFCC', '#CCCCFF', '#FFFFCC', '#CCFFFF', '#FFCCFF']; // 预定义颜色
+    let colorIndex = 0;
+
+    cells.forEach((cell) => {
+      const text = cell.textContent.trim();
+      if (!text || text === 'X') {
+        // 没有内容或内容为 "X" 的单元格保持白色
+        cell.style.backgroundColor = '#FFFFFF';
+        return;
+      }
+
+      if (!colorMap[text]) {
+        // 如果内容没有对应颜色，分配一个新颜色
+        colorMap[text] = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length; // 循环使用颜色
+      }
+
+      // 设置单元格背景颜色
+      cell.style.backgroundColor = colorMap[text];
+    });
+  }
+
+  // 在页面加载时自动调用
+  window.onload = () => {
+    loadTodos(); // 加载待办事项
+    colorizeTable(); // 为表格着色
+  };
 </script>
