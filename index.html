@@ -6,27 +6,42 @@
   <div class="author-info__description">学无止境</div>
 </div>
 
-<!-- ✂️ 登录模块 -->
+<!-- ✂️ 快捷网站模块 -->
 <hr>
-<h2>登录</h2>
-<div id="login-container" class="tool">
-  <input type="password" id="password-input" placeholder="输入密码...">
-  <button onclick="login()">登录</button>
-  <div id="login-status"></div>
-</div>
+<h2>快捷网站</h2>
+<div id="quick-links-container">
+  <!-- 学习 -->
+  <div id="quick-links-study" class="quick-links-section">
+    <h3>学习</h3>
+    <ul>
+      <li><a href="https://blackboard.gwu.edu/" target="_blank">Blackboard</a></li>
+      <li><a href="https://csci6441.org/" target="_blank">6411 Database</a></li>
+      <li><a href="https://faculty.cs.gwu.edu/goldfrank/4511/" target="_blank">6511 AI</a></li>
+    </ul>
+  </div>
 
-<!-- ✂️ 待办事项模块插入位置 -->
-<hr>
-<h2>待办事项</h2>
-<div id="todo-container" class="tool">
-  <input type="text" id="todo-input" placeholder="输入待办事项..." disabled>
-  <button onclick="addTodo()" disabled>添加</button>
-  <ul id="todo-list"></ul>
+  <!-- 工作 -->
+  <div id="quick-links-work" class="quick-links-section">
+    <h3>工作</h3>
+    <ul>
+      <li><a href="https://classroom.github.com" target="_blank">GitHub</a></li>
+      <li><a href="https://classroom.github.com/classrooms" target="_blank">GitHub Classroom</a></li>
+    </ul>
+  </div>
+
+  <!-- 其他 -->
+  <div id="quick-links-other" class="quick-links-section">
+    <h3>其他</h3>
+    <ul>
+      <li><a href="https://drive.google.com/drive/" target="_blank">Google drive</a></li>
+      <li><a href="https://www.bilibili.com" target="_blank">Bilibili</a></li>
+    </ul>
+  </div>
 </div>
 
 <!-- ✂️ 日程表模块 -->
 <hr>
-<h2>本周日程表</h2>
+<h2>日程表</h2>
 <div id="schedule-table">
   <table>
     <thead>
@@ -92,83 +107,6 @@
 </div>
 
 <script>
-  let isLoggedIn = false;
-
-  function login() {
-    const password = document.getElementById('password-input').value;
-    const loginStatus = document.getElementById('login-status');
-    if (password === 'djl20000828') { // 设置一个简单的密码
-      isLoggedIn = true;
-      loginStatus.textContent = '登录成功！';
-      loginStatus.style.color = 'green';
-      document.getElementById('todo-input').disabled = false;
-      document.querySelector('#todo-container button').disabled = false;
-    } else {
-      loginStatus.textContent = '密码错误，请重试。';
-      loginStatus.style.color = 'red';
-    }
-  }
-
-  function addTodo() {
-    if (!isLoggedIn) {
-      alert('请先登录！');
-      return;
-    }
-    const input = document.getElementById('todo-input');
-    const text = input.value.trim();
-    if (!text) return;
-    const li = document.createElement('li');
-    li.textContent = text;
-    li.onclick = () => li.classList.toggle('completed');
-
-    const del = document.createElement('span');
-    del.textContent = '✖';
-    del.onclick = (e) => {
-      e.stopPropagation();
-      li.remove();
-      saveTodos(); // 保存更新后的待办事项
-    };
-    li.appendChild(del);
-
-    document.getElementById('todo-list').appendChild(li);
-    input.value = '';
-    saveTodos(); // 保存待办事项
-  }
-
-  function saveTodos() {
-    const todos = [];
-    document.querySelectorAll('#todo-list li').forEach((li) => {
-      todos.push({
-        text: li.firstChild.textContent,
-        completed: li.classList.contains('completed'),
-      });
-    });
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }
-
-  function loadTodos() {
-    const todos = JSON.parse(localStorage.getItem('todos')) || [];
-    const todoList = document.getElementById('todo-list');
-    todoList.innerHTML = ''; // 清空列表
-    todos.forEach((todo) => {
-      const li = document.createElement('li');
-      li.textContent = todo.text;
-      if (todo.completed) li.classList.add('completed');
-      li.onclick = () => li.classList.toggle('completed');
-
-      const del = document.createElement('span');
-      del.textContent = '✖';
-      del.onclick = (e) => {
-        e.stopPropagation();
-        li.remove();
-        saveTodos(); // 保存更新后的待办事项
-      };
-      li.appendChild(del);
-
-      todoList.appendChild(li);
-    });
-  }
-
   function colorizeTable() {
     const table = document.querySelector('#schedule-table table');
     const cells = table.querySelectorAll('td');
@@ -197,7 +135,6 @@
 
   // 在页面加载时自动调用
   window.onload = () => {
-    loadTodos(); // 加载待办事项
     colorizeTable(); // 为表格着色
   };
 </script>
