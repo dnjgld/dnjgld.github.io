@@ -133,9 +133,14 @@
 <script>
   const showPopupBtn = document.getElementById('showPopupBtn');
   const floatingPopup = document.getElementById('floatingPopup');
-  const closePopupBtn = document.getElementById('closePopupBtn');
-  showPopupBtn.onclick = () => { floatingPopup.style.display = 'block'; };
-  closePopupBtn.onclick = () => { floatingPopup.style.display = 'none'; };
+
+  showPopupBtn.onclick = () => {
+    if (floatingPopup.style.display === 'block') {
+      floatingPopup.style.display = 'none';
+    } else {
+      floatingPopup.style.display = 'block';
+    }
+  };
 </script>
 
 <!-- Google 日历嵌入示例 -->
@@ -273,3 +278,148 @@
     colorizeTable(); // 为表格着色
   };
 </script>
+
+<style>
+  /* 更改整体配色为浅黄色，并添加圆角处理 */
+  body {
+    background: linear-gradient(135deg, #fffde7, #fff9c4);
+    background-attachment: fixed;
+    background-size: cover;
+    color: #795548;
+    font-family: 'Georgia', serif;
+  }
+
+  h2, h3 {
+    color: #5d4037;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  a {
+    color: #8d6e63;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: #5d4037;
+  }
+
+  .card-info-avatar {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(121, 85, 72, 0.2);
+    color: #795548;
+    border-radius: 15px;
+  }
+
+  .quick-links-section {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(121, 85, 72, 0.2);
+    color: #795548;
+    border-radius: 15px;
+  }
+
+  #schedule-table table {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(121, 85, 72, 0.2);
+    color: #795548;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  #schedule-table th {
+    background: rgba(121, 85, 72, 0.8);
+    color: #fff;
+  }
+
+  #schedule-table tbody tr:nth-child(odd) {
+    background: rgba(255, 249, 196, 0.5);
+  }
+
+  #schedule-table tbody tr:nth-child(even) {
+    background: rgba(255, 253, 231, 0.5);
+  }
+</style>
+
+<style>
+  /* 使用搞怪字体并调整音乐播放器样式 */
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
+  body {
+    font-family: 'Comic Neue', cursive;
+  }
+
+  .floating-popup {
+    background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
+    border: 2px solid #4caf50;
+    box-shadow: 0 12px 40px rgba(76, 175, 80, 0.4);
+  }
+
+  .floating-popup h3 {
+    color: #388e3c !important;
+    border-bottom: 2px solid #4caf50;
+  }
+
+  .floating-popup-close {
+    color: #4caf50;
+  }
+
+  .floating-popup-close:hover {
+    color: #2e7d32;
+  }
+
+  /* 确保所有字体都使用搞怪字体 */
+  body, h1, h2, h3, h4, h5, h6, p, a, li, td, th, span, div {
+    font-family: 'Comic Neue', cursive;
+  }
+</style>
+<style>
+  /* 使用中英文搞怪字体（抖抖字体） */
+  @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+  body, h1, h2, h3, h4, h5, h6, p, a, li, td, th, span, div {
+    font-family: 'ZCOOL KuaiLe', 'Shadows Into Light', cursive;
+  }
+</style>
+<style>
+  /* 统一 iframe 的颜色样式 */
+  iframe {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(76, 175, 80, 0.2);
+  }
+</style>
+<style>
+  /* 统一音乐播放器为 Spotify 的颜色主题 */
+  .floating-btn {
+    background: #1db954;
+    border: 2px solid #1db954;
+    box-shadow: 0 8px 32px rgba(29, 185, 84, 0.4);
+  }
+
+  .floating-btn:hover {
+    background: #1ed760;
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 12px 40px rgba(29, 185, 84, 0.6);
+  }
+
+  .floating-popup {
+    background: #1db954;
+    border: 2px solid #1db954;
+    box-shadow: 0 12px 40px rgba(29, 185, 84, 0.4);
+  }
+
+  .floating-popup h3 {
+    color: #fff !important;
+    border-bottom: 2px solid #1ed760;
+  }
+
+  .floating-popup-close {
+    color: #fff;
+  }
+
+  .floating-popup-close:hover {
+    color: #1ed760;
+  }
+</style>
